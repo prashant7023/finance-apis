@@ -1,0 +1,73 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  schemas  = ["public", "master_data", "data_tx"]
+}
+
+enum Role {
+  VIEWER
+  ANALYST
+  ADMIN
+
+  @@schema("master_data")
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+
+  @@schema("master_data")
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+
+  @@schema("data_tx")
+}
+
+model User {
+  id               String        @id @default(uuid())
+  email            String        @unique
+  passwordHash     String
+  name             String
+  role             Role          @default(VIEWER)
+  status           UserStatus    @default(ACTIVE)
+  refreshTokenHash String?
+
+  transactions     Transaction[]
+
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  @@map("users")
+  @@schema("master_data")
+}
+
+model Transaction {
+  id        String          @id @default(uuid())
+  amount    Decimal         @db.Decimal(15, 2)
+  type      TransactionType
+  category  String
+  date      DateTime        @db.Date
+  notes     String?
+  isDeleted Boolean         @default(false)
+
+  userId    String?
+  user      User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+
+  @@index([userId])
+  @@index([type])
+  @@index([category])
+  @@index([date])
+  @@map("transactions")
+  @@schema("data_tx")
+}
