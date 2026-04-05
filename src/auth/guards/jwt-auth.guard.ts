@@ -1,17 +1,11 @@
 import {
 	ExecutionContext,
-	ForbiddenException,
 	Injectable,
 	Logger,
 	UnauthorizedException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { RequestUser } from '../../common/types/jwt-payload.type';
-
-type RequestHeaders = {
-	referer?: string;
-	'x-user-id'?: string | string[];
-};
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
@@ -34,39 +28,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 			throw new UnauthorizedException(message);
 		}
 
-		const request = context.switchToHttp().getRequest<{ headers: RequestHeaders }>();
-		const referer = request.headers.referer ?? '';
-
-		// Enforce token-user binding only for calls made from Swagger UI.
-		if (referer.includes('/docs')) {
-			const rawUserId = request.headers['x-user-id'];
-			const headerUserId = Array.isArray(rawUserId) ? rawUserId[0] : rawUserId;
-			const tokenUserId = this.extractUserId(user);
-
-			if (!headerUserId || !tokenUserId || headerUserId !== tokenUserId) {
-				this.logger.warn(
-					`Swagger user binding failed. header x-user-id=${headerUserId ?? 'none'} token sub=${tokenUserId ?? 'none'}`,
-				);
-				throw new ForbiddenException(
-					'For Swagger UI requests, x-user-id must be provided and match token user id.',
-				);
-			}
-		}
-
 		return user;
-	}
-
-	private extractUserId(user: unknown): string | null {
-		if (
-			typeof user === 'object' &&
-			user !== null &&
-			'id' in user &&
-			typeof (user as { id: unknown }).id === 'string'
-		) {
-			return (user as { id: string }).id;
-		}
-
-		return null;
 	}
 
 	private extractInfoMessage(info: unknown): string | null {

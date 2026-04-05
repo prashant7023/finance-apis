@@ -10,7 +10,4 @@ coverage
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-client
-finance-backend-client
-swagger-gen
 test

@@ -41,7 +41,7 @@ describe('Swagger Docs (e2e)', () => {
       | Record<string, unknown>
       | undefined;
     expect(securitySchemes).toBeDefined();
-    expect(securitySchemes?.['x-user-id']).toBeDefined();
+    expect(securitySchemes?.bearer).toBeDefined();
 
     const pathKeys = Object.keys(paths);
     expect(pathKeys.some((key) => key.endsWith('/auth/login'))).toBe(true);

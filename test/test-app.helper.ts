@@ -52,26 +52,15 @@ export async function createTestApp(): Promise<{
     new ResponseTransformInterceptor(),
   );
 
-  if ((process.env.NODE_ENV ?? 'test') !== 'production') {
-    const swaggerConfig = new DocumentBuilder()
-      .setTitle('Finance Dashboard API')
-      .setDescription('Finance Data Processing & Access Control Backend')
-      .setVersion('1.0')
-      .addBearerAuth()
-      .addApiKey(
-        {
-          type: 'apiKey',
-          in: 'header',
-          name: 'x-user-id',
-          description: 'For Swagger UI requests, set this to the JWT user id (sub).',
-        },
-        'x-user-id',
-      )
-      .build();
+  const swaggerConfig = new DocumentBuilder()
+    .setTitle('Finance Dashboard API')
+    .setDescription('Finance Data Processing & Access Control Backend')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build();
 
-    const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
-    SwaggerModule.setup('docs', app, swaggerDocument);
-  }
+  const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
+  SwaggerModule.setup('docs', app, swaggerDocument);
 
   await app.init();
 

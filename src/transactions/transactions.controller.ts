@@ -12,7 +12,7 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiSecurity, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Role } from '@prisma/client/index';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { Roles } from '../auth/decorators/roles.decorator';
@@ -26,7 +26,6 @@ import { TransactionsService } from './transactions.service';
 
 @ApiTags('transactions')
 @ApiBearerAuth()
-@ApiSecurity('x-user-id')
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('transactions')
 export class TransactionsController {

@@ -155,6 +155,25 @@ docker run --rm -p 3000:3000 --env-file .env finance-backend
 - API: `/api/v1`
 - Swagger: `/docs`
 - Swagger JSON: `/docs-json`
+- Health: `/api/v1/health`
+
+## Health Cron (Every 10 Minutes)
+
+The app now includes a scheduler that can ping its own health endpoint every 10 minutes.
+
+- Cron expression: `*/10 * * * *`
+- Target route: `/api/v1/health`
+
+Environment variables:
+
+- `SELF_HEALTH_CRON_ENABLED=false` default
+- `APP_URL=http://localhost:3000` required only when self-ping is enabled
+
+For Render keep-awake strategy, configure an external cron job to call:
+
+- `https://<your-service-domain>/api/v1/health`
+
+every 10 minutes.
 
 ## Swagger Client Auto-Generation
 
@@ -209,8 +228,6 @@ The generator flow will:
 Swagger UI access note for protected endpoints:
 
 - Provide Bearer token using the `bearer` auth field.
-- Provide `x-user-id` using the `x-user-id` auth field.
-- `x-user-id` must match the user id in the JWT token (`sub`) when requests are sent from `/docs`.
 
 ### Auth
 

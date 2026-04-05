@@ -1,6 +1,6 @@
 import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiBearerAuth, ApiSecurity, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Throttle } from '@nestjs/throttler';
 import { RequestUser } from '../common/types/jwt-payload.type';
 import { CurrentUser } from './decorators/current-user.decorator';
@@ -39,7 +39,6 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiBearerAuth()
-  @ApiSecurity('x-user-id')
   logout(@CurrentUser() user: RequestUser): Promise<void> {
     return this.authService.logout(user.id);
   }

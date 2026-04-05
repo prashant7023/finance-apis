@@ -12,8 +12,22 @@ async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
   const config = app.get(ConfigService);
   const httpLogger = new Logger('HTTP');
+  const host = config.get<string>('HOST') ?? '0.0.0.0';
+  const port = config.get<number>('PORT') ?? 3000;
+  const corsOrigin = config.get<string>('CORS_ORIGIN') ?? '*';
 
   app.setGlobalPrefix('api/v1');
+
+  app.enableCors({
+    origin:
+      corsOrigin === '*'
+        ? true
+        : corsOrigin
+            .split(',')
+            .map((origin) => origin.trim())
+            .filter((origin) => origin.length > 0),
+    credentials: true,
+  });
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -40,27 +54,16 @@ async function bootstrap(): Promise<void> {
     next();
   });
 
-  if (config.get<string>('NODE_ENV') !== 'production') {
-    const swaggerConfig = new DocumentBuilder()
-      .setTitle('Finance Dashboard API')
-      .setDescription('Finance Data Processing & Access Control Backend')
-      .setVersion('1.0')
-      .addBearerAuth()
-      .addApiKey(
-        {
-          type: 'apiKey',
-          in: 'header',
-          name: 'x-user-id',
-          description: 'For Swagger UI requests, set this to the JWT user id (sub).',
-        },
-        'x-user-id',
-      )
-      .build();
-    const document = SwaggerModule.createDocument(app, swaggerConfig);
-    SwaggerModule.setup('docs', app, document);
-  }
+  const swaggerConfig = new DocumentBuilder()
+    .setTitle('Finance Dashboard API')
+    .setDescription('Finance Data Processing & Access Control Backend')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build();
+  const document = SwaggerModule.createDocument(app, swaggerConfig);
+  SwaggerModule.setup('docs', app, document);
 
-  await app.listen(config.get<number>('PORT') ?? 3000);
+  await app.listen(port, host);
 }
 
 bootstrap();
