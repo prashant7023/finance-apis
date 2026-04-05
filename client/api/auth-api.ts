@@ -87,9 +87,6 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-            // authentication x-user-id required
-            await setApiKeyToObject(localVarHeaderParameter, "x-user-id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);

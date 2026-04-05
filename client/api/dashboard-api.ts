@@ -48,9 +48,6 @@ export const DashboardApiAxiosParamCreator = function (configuration?: Configura
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-            // authentication x-user-id required
-            await setApiKeyToObject(localVarHeaderParameter, "x-user-id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -83,9 +80,6 @@ export const DashboardApiAxiosParamCreator = function (configuration?: Configura
             // authentication bearer required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication x-user-id required
-            await setApiKeyToObject(localVarHeaderParameter, "x-user-id", configuration)
 
 
     
@@ -120,9 +114,6 @@ export const DashboardApiAxiosParamCreator = function (configuration?: Configura
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-            // authentication x-user-id required
-            await setApiKeyToObject(localVarHeaderParameter, "x-user-id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -155,9 +146,6 @@ export const DashboardApiAxiosParamCreator = function (configuration?: Configura
             // authentication bearer required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication x-user-id required
-            await setApiKeyToObject(localVarHeaderParameter, "x-user-id", configuration)
 
 
     

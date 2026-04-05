@@ -37,7 +37,7 @@ void (empty response body)
 
 ### Authorization
 
-[bearer](../README.md#bearer), [x-user-id](../README.md#x-user-id)
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -80,7 +80,7 @@ void (empty response body)
 
 ### Authorization
 
-[bearer](../README.md#bearer), [x-user-id](../README.md#x-user-id)
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -123,7 +123,7 @@ void (empty response body)
 
 ### Authorization
 
-[bearer](../README.md#bearer), [x-user-id](../README.md#x-user-id)
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -166,7 +166,7 @@ void (empty response body)
 
 ### Authorization
 
-[bearer](../README.md#bearer), [x-user-id](../README.md#x-user-id)
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 

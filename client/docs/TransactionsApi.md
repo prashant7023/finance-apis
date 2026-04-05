@@ -46,7 +46,7 @@ void (empty response body)
 
 ### Authorization
 
-[bearer](../README.md#bearer), [x-user-id](../README.md#x-user-id)
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -76,6 +76,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new TransactionsApi(configuration);
 
+let date: string; // (optional) (default to undefined)
 let type: 'INCOME' | 'EXPENSE'; // (optional) (default to undefined)
 let category: string; // (optional) (default to undefined)
 let from: string; // (optional) (default to undefined)
@@ -86,6 +87,7 @@ let sortBy: 'date' | 'amount' | 'createdAt'; // (optional) (default to undefined
 let order: 'asc' | 'desc'; // (optional) (default to undefined)
 
 const { status, data } = await apiInstance.transactionsControllerFindAll(
+    date,
     type,
     category,
     from,
@@ -101,6 +103,7 @@ const { status, data } = await apiInstance.transactionsControllerFindAll(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
+| **date** | [**string**] |  | (optional) defaults to undefined|
 | **type** | [**&#39;INCOME&#39; | &#39;EXPENSE&#39;**]**Array<&#39;INCOME&#39; &#124; &#39;EXPENSE&#39;>** |  | (optional) defaults to undefined|
 | **category** | [**string**] |  | (optional) defaults to undefined|
 | **from** | [**string**] |  | (optional) defaults to undefined|
@@ -117,7 +120,7 @@ void (empty response body)
 
 ### Authorization
 
-[bearer](../README.md#bearer), [x-user-id](../README.md#x-user-id)
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -167,7 +170,7 @@ void (empty response body)
 
 ### Authorization
 
-[bearer](../README.md#bearer), [x-user-id](../README.md#x-user-id)
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -217,7 +220,7 @@ void (empty response body)
 
 ### Authorization
 
-[bearer](../README.md#bearer), [x-user-id](../README.md#x-user-id)
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 
@@ -271,7 +274,7 @@ void (empty response body)
 
 ### Authorization
 
-[bearer](../README.md#bearer), [x-user-id](../README.md#x-user-id)
+[bearer](../README.md#bearer)
 
 ### HTTP request headers
 

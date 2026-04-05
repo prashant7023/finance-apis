@@ -253,6 +253,13 @@ Swagger UI access note for protected endpoints:
 - PATCH `/api/v1/transactions/:id` ANALYST or ADMIN
 - DELETE `/api/v1/transactions/:id` ADMIN soft delete
 
+Record filtering is supported on `GET /api/v1/transactions` using query params:
+
+- `date` exact day filter (YYYY-MM-DD)
+- `from` and `to` date range (YYYY-MM-DD)
+- `category` category contains match (case-insensitive)
+- `type` transaction type (`INCOME` or `EXPENSE`)
+
 ### Dashboard
 
 - GET `/api/v1/dashboard/summary` all authenticated users

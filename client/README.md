@@ -59,6 +59,7 @@ Class | Method | HTTP request | Description
 *DashboardApi* | [**dashboardControllerGetMonthlyTrends**](docs/DashboardApi.md#dashboardcontrollergetmonthlytrends) | **GET** /api/v1/dashboard/trends | 
 *DashboardApi* | [**dashboardControllerGetRecentActivity**](docs/DashboardApi.md#dashboardcontrollergetrecentactivity) | **GET** /api/v1/dashboard/recent | 
 *DashboardApi* | [**dashboardControllerGetSummary**](docs/DashboardApi.md#dashboardcontrollergetsummary) | **GET** /api/v1/dashboard/summary | 
+*HealthApi* | [**healthControllerGetHealth**](docs/HealthApi.md#healthcontrollergethealth) | **GET** /api/v1/health | 
 *TransactionsApi* | [**transactionsControllerCreate**](docs/TransactionsApi.md#transactionscontrollercreate) | **POST** /api/v1/transactions | 
 *TransactionsApi* | [**transactionsControllerFindAll**](docs/TransactionsApi.md#transactionscontrollerfindall) | **GET** /api/v1/transactions | 
 *TransactionsApi* | [**transactionsControllerFindOne**](docs/TransactionsApi.md#transactionscontrollerfindone) | **GET** /api/v1/transactions/{id} | 
@@ -91,11 +92,4 @@ Authentication schemes defined for the API:
 ### bearer
 
 - **Type**: Bearer authentication (JWT)
-
-<a id="x-user-id"></a>
-### x-user-id
-
-- **Type**: API key
-- **API key parameter name**: x-user-id
-- **Location**: HTTP header
 

@@ -55,9 +55,6 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-            // authentication x-user-id required
-            await setApiKeyToObject(localVarHeaderParameter, "x-user-id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -74,6 +71,7 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
+         * @param {string} [date] 
          * @param {TransactionsControllerFindAllTypeEnum} [type] 
          * @param {string} [category] 
          * @param {string} [from] 
@@ -85,7 +83,7 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        transactionsControllerFindAll: async (type?: TransactionsControllerFindAllTypeEnum, category?: string, from?: string, to?: string, page?: string, limit?: string, sortBy?: TransactionsControllerFindAllSortByEnum, order?: TransactionsControllerFindAllOrderEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        transactionsControllerFindAll: async (date?: string, type?: TransactionsControllerFindAllTypeEnum, category?: string, from?: string, to?: string, page?: string, limit?: string, sortBy?: TransactionsControllerFindAllSortByEnum, order?: TransactionsControllerFindAllOrderEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/v1/transactions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -102,8 +100,9 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-            // authentication x-user-id required
-            await setApiKeyToObject(localVarHeaderParameter, "x-user-id", configuration)
+            if (date !== undefined) {
+                localVarQueryParameter['date'] = date;
+            }
 
             if (type !== undefined) {
                 localVarQueryParameter['type'] = type;
@@ -174,9 +173,6 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-            // authentication x-user-id required
-            await setApiKeyToObject(localVarHeaderParameter, "x-user-id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -213,9 +209,6 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
             // authentication bearer required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication x-user-id required
-            await setApiKeyToObject(localVarHeaderParameter, "x-user-id", configuration)
 
 
     
@@ -257,9 +250,6 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-            // authentication x-user-id required
-            await setApiKeyToObject(localVarHeaderParameter, "x-user-id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -297,6 +287,7 @@ export const TransactionsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} [date] 
          * @param {TransactionsControllerFindAllTypeEnum} [type] 
          * @param {string} [category] 
          * @param {string} [from] 
@@ -308,8 +299,8 @@ export const TransactionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async transactionsControllerFindAll(type?: TransactionsControllerFindAllTypeEnum, category?: string, from?: string, to?: string, page?: string, limit?: string, sortBy?: TransactionsControllerFindAllSortByEnum, order?: TransactionsControllerFindAllOrderEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.transactionsControllerFindAll(type, category, from, to, page, limit, sortBy, order, options);
+        async transactionsControllerFindAll(date?: string, type?: TransactionsControllerFindAllTypeEnum, category?: string, from?: string, to?: string, page?: string, limit?: string, sortBy?: TransactionsControllerFindAllSortByEnum, order?: TransactionsControllerFindAllOrderEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.transactionsControllerFindAll(date, type, category, from, to, page, limit, sortBy, order, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TransactionsApi.transactionsControllerFindAll']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -371,6 +362,7 @@ export const TransactionsApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
+         * @param {string} [date] 
          * @param {TransactionsControllerFindAllTypeEnum} [type] 
          * @param {string} [category] 
          * @param {string} [from] 
@@ -382,8 +374,8 @@ export const TransactionsApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        transactionsControllerFindAll(type?: TransactionsControllerFindAllTypeEnum, category?: string, from?: string, to?: string, page?: string, limit?: string, sortBy?: TransactionsControllerFindAllSortByEnum, order?: TransactionsControllerFindAllOrderEnum, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.transactionsControllerFindAll(type, category, from, to, page, limit, sortBy, order, options).then((request) => request(axios, basePath));
+        transactionsControllerFindAll(date?: string, type?: TransactionsControllerFindAllTypeEnum, category?: string, from?: string, to?: string, page?: string, limit?: string, sortBy?: TransactionsControllerFindAllSortByEnum, order?: TransactionsControllerFindAllOrderEnum, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.transactionsControllerFindAll(date, type, category, from, to, page, limit, sortBy, order, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -432,6 +424,7 @@ export class TransactionsApi extends BaseAPI {
 
     /**
      * 
+     * @param {string} [date] 
      * @param {TransactionsControllerFindAllTypeEnum} [type] 
      * @param {string} [category] 
      * @param {string} [from] 
@@ -443,8 +436,8 @@ export class TransactionsApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public transactionsControllerFindAll(type?: TransactionsControllerFindAllTypeEnum, category?: string, from?: string, to?: string, page?: string, limit?: string, sortBy?: TransactionsControllerFindAllSortByEnum, order?: TransactionsControllerFindAllOrderEnum, options?: RawAxiosRequestConfig) {
-        return TransactionsApiFp(this.configuration).transactionsControllerFindAll(type, category, from, to, page, limit, sortBy, order, options).then((request) => request(this.axios, this.basePath));
+    public transactionsControllerFindAll(date?: string, type?: TransactionsControllerFindAllTypeEnum, category?: string, from?: string, to?: string, page?: string, limit?: string, sortBy?: TransactionsControllerFindAllSortByEnum, order?: TransactionsControllerFindAllOrderEnum, options?: RawAxiosRequestConfig) {
+        return TransactionsApiFp(this.configuration).transactionsControllerFindAll(date, type, category, from, to, page, limit, sortBy, order, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

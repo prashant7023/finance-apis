@@ -5,6 +5,7 @@ README.md
 api.ts
 api/auth-api.ts
 api/dashboard-api.ts
+api/health-api.ts
 api/transactions-api.ts
 api/users-api.ts
 base.ts
@@ -14,6 +15,7 @@ docs/AssignRoleDto.md
 docs/AuthApi.md
 docs/CreateTransactionDto.md
 docs/DashboardApi.md
+docs/HealthApi.md
 docs/LoginDto.md
 docs/RegisterDto.md
 docs/TransactionsApi.md

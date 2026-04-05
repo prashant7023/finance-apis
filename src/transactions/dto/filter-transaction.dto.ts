@@ -11,6 +11,11 @@ import {
 } from 'class-validator';
 
 export class FilterTransactionDto {
+  @ApiPropertyOptional({ example: '2026-03-12' })
+  @IsOptional()
+  @IsDateString()
+  date?: string;
+
   @ApiPropertyOptional({ enum: TransactionType })
   @IsOptional()
   @IsEnum(TransactionType)

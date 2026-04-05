@@ -55,6 +55,7 @@ export class TransactionsService {
 
   async findAll(filter: FilterTransactionDto, user: RequestUser) {
     const {
+      date,
       type,
       category,
       from,
@@ -73,17 +74,14 @@ export class TransactionsService {
     const pageNum = Number.isNaN(parsedPage) ? 1 : Math.max(1, parsedPage);
     const limitNum = Number.isNaN(parsedLimit) ? 20 : Math.max(1, Math.min(100, parsedLimit));
 
+    const dateFilter = this.buildDateFilter({ date, from, to });
+
     const where: Prisma.TransactionWhereInput = {
       isDeleted: false,
       ...(user.role === Role.VIEWER && { userId: user.id }),
       ...(type && { type }),
       ...(category && { category: { contains: category, mode: 'insensitive' } }),
-      ...((from || to) && {
-        date: {
-          ...(from && { gte: new Date(from) }),
-          ...(to && { lte: new Date(to) }),
-        },
-      }),
+      ...(dateFilter && { date: dateFilter }),
     };
 
     const [data, total] = await this.prisma.$transaction([
@@ -112,6 +110,44 @@ export class TransactionsService {
       limit: limitNum,
       totalPages: Math.ceil(total / limitNum),
     };
+  }
+
+  private buildDateFilter({
+    date,
+    from,
+    to,
+  }: {
+    date?: string;
+    from?: string;
+    to?: string;
+  }): Prisma.DateTimeFilter | undefined {
+    if (date) {
+      return {
+        gte: this.startOfDay(date),
+        lte: this.endOfDay(date),
+      };
+    }
+
+    if (!from && !to) {
+      return undefined;
+    }
+
+    return {
+      ...(from && { gte: this.startOfDay(from) }),
+      ...(to && { lte: this.endOfDay(to) }),
+    };
+  }
+
+  private startOfDay(value: string): Date {
+    const date = new Date(value);
+    date.setUTCHours(0, 0, 0, 0);
+    return date;
+  }
+
+  private endOfDay(value: string): Date {
+    const date = new Date(value);
+    date.setUTCHours(23, 59, 59, 999);
+    return date;
   }
 
   async findOne(id: string, user: RequestUser) {

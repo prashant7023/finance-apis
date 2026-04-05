@@ -171,6 +171,55 @@ describe('Transactions (e2e)', () => {
     expect(list.every((item) => item.userId === viewerUserId)).toBe(true);
   });
 
+  it('filters records by date, category, and type', async () => {
+    await prisma.transaction.createMany({
+      data: [
+        {
+          amount: 140,
+          category: 'Utilities-Bill',
+          type: TransactionType.EXPENSE,
+          date: new Date('2026-04-10T18:45:00.000Z'),
+          userId: adminUserId,
+        },
+        {
+          amount: 2500,
+          category: 'Utilities-Rebate',
+          type: TransactionType.INCOME,
+          date: new Date('2026-04-10T09:00:00.000Z'),
+          userId: adminUserId,
+        },
+        {
+          amount: 90,
+          category: 'Groceries',
+          type: TransactionType.EXPENSE,
+          date: new Date('2026-04-11T08:00:00.000Z'),
+          userId: adminUserId,
+        },
+      ],
+    });
+
+    const response = await request(app.getHttpServer())
+      .get('/api/v1/transactions')
+      .query({
+        date: '2026-04-10',
+        category: 'utilities',
+        type: 'EXPENSE',
+      })
+      .set('Authorization', `Bearer ${adminToken}`)
+      .expect(200);
+
+    const list = response.body.data.data as Array<{
+      type: string;
+      category: string;
+      date: string;
+    }>;
+
+    expect(list.length).toBeGreaterThan(0);
+    expect(list.every((item) => item.type === 'EXPENSE')).toBe(true);
+    expect(list.every((item) => item.category.toLowerCase().includes('utilities'))).toBe(true);
+    expect(list.every((item) => item.date.startsWith('2026-04-10'))).toBe(true);
+  });
+
   it('prevents analyst from updating admin transaction', async () => {
     const adminTx = await prisma.transaction.create({
       data: {

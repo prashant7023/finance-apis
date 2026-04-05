@@ -59,9 +59,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-            // authentication x-user-id required
-            await setApiKeyToObject(localVarHeaderParameter, "x-user-id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -101,9 +98,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             // authentication bearer required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication x-user-id required
-            await setApiKeyToObject(localVarHeaderParameter, "x-user-id", configuration)
 
             if (role !== undefined) {
                 localVarQueryParameter['role'] = role;
@@ -158,9 +152,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-            // authentication x-user-id required
-            await setApiKeyToObject(localVarHeaderParameter, "x-user-id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -198,9 +189,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-            // authentication x-user-id required
-            await setApiKeyToObject(localVarHeaderParameter, "x-user-id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -237,9 +225,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             // authentication bearer required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication x-user-id required
-            await setApiKeyToObject(localVarHeaderParameter, "x-user-id", configuration)
 
 
     
@@ -280,9 +265,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             // authentication bearer required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication x-user-id required
-            await setApiKeyToObject(localVarHeaderParameter, "x-user-id", configuration)
 
 
     
